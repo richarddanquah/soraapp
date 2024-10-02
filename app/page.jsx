@@ -13,10 +13,12 @@ export default function Home() {
       .then((data) => {
         setItems(data.items); // Ensure you're accessing 'items' correctly from the API response
         setSortedItems(sortByDate(data.items));
-      });
+      })
+      .catch((err) => console.error("Fetch error: ", err));
   }, []);
 
   const handleSortChange = (sortOptions) => {
+    console.log("Selected Sort Option: ", sortOptions);
     let sorted;
     if (sortOptions === 'date-asc') {
       sorted = sortByDate(items);
@@ -25,7 +27,10 @@ export default function Home() {
     } else {
       sorted = sortByFilenameDesc(items);
     }
-    setSortedItems(sorted);
+    console.log("Sorted Items: ", sorted); // Logging to check sorted result
+    if(sorted){
+      setSortedItems([...sorted]); // Ensuring sorted items are spread into a new array
+    }
   };
 
   return (
