@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   const filePath = path.join(process.cwd(), "data", "data.csv"); // Path to your CSV file
-  
+
   // Wrapping the file reading logic in a promise to handle async behavior
   const readCSVFile = () => {
     return new Promise((resolve, reject) => {
